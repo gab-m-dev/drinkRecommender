@@ -1,5 +1,8 @@
 <?php
 
+// nur Temp!
+header("Access-Control-Allow-Origin: *");
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Selective\BasePath\BasePathMiddleware;
@@ -20,7 +23,7 @@ $app->get('/', function (Request $request, Response $response) {
 });
 
 $app->get('/api-drinks', function (Request $request, Response $response) {
-$sql = "SELECT * FROM Drinks ORDER BY RAND() Limit 10";
+$sql = "SELECT Name, Category, Ingrediants, Alcohol, Glass, Instructions FROM Drinks ORDER BY RAND() Limit 10";
 
     try {
         $db = new Db();
