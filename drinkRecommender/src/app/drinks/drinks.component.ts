@@ -1,5 +1,5 @@
-import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 import { Component, OnInit } from '@angular/core';
+import { waitForAsync } from '@angular/core/testing';
 import { Drinks } from 'src/Drinks';
 import { GetDrinkService } from '../get-drink.service'
 
@@ -8,11 +8,11 @@ class Drink implements Drinks {
   Name:String;
   Glass:String;
   Category:String;
-  Ingrediants: String;
+  Ingrediants: Object;
   Alcohol: String;
   Instructions: String;
 
-  constructor(drinkname: String,glass: String,category: String, ingrediants: String, alcohol: String, instructions: String){
+  constructor(drinkname: String,glass: String,category: String, ingrediants: Object, alcohol: String, instructions: String){
     this.Name = drinkname;
     this.Glass = glass;
     this.Category = category;
@@ -44,9 +44,10 @@ export class DrinksComponent implements OnInit {
   }
 
   getDrink(): void {
-    console.log('getDrink: called');
-    this.getDrinkService.getDrinks().subscribe((returnedDrinks: Array<Drink>) => this.drinks.push(new Drink(returnedDrinks[0].Name,returnedDrinks[0].Glass,returnedDrinks[0].Category,returnedDrinks[0].Ingrediants,returnedDrinks[0].Alcohol,returnedDrinks[0].Instructions)));
-    //console.log(this.returnedDrinks)
+      this.getDrinkService.getDrinks().subscribe((returnedDrinks: Array<Drink>) => { for(let i = 0; i < returnedDrinks.length; i++){
+      this.drinks.push(new Drink(returnedDrinks[i].Name,returnedDrinks[i].Glass,returnedDrinks[i].Category, JSON.parse(String(returnedDrinks[i].Ingrediants).replace(/'/g, '"')),returnedDrinks[i].Alcohol,returnedDrinks[i].Instructions))
+    }});
+  
     //this.drink[0] = new Drink(this.returnedDrinks[0]['Name'],this.returnedDrinks[0]['Glass'],this.returnedDrinks[0]['Category'],this.returnedDrinks[0]['Alcohol'],this.returnedDrinks[0]['Instructions'],this.returnedDrinks[0]['Ingrediants'] );
   }
 }

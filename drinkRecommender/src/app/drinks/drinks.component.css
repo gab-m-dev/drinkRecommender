@@ -1,3 +1,9 @@
 div.container {
-    margin: 20px;
+    margin: 2%;
+    margin-right: 5%;
+    margin-left: 5%;
   }
+
+.container > mat-card {
+  width: 300px;
+}

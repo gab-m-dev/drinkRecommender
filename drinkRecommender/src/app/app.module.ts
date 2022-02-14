@@ -8,8 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DrinksComponent } from './drinks/drinks.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MessagesComponent } from './messages/messages.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -23,8 +26,11 @@ import { MessagesComponent } from './messages/messages.component';
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
-    MatGridListModule,
-    HttpClientModule
+    MatToolbarModule,
+    FlexLayoutModule,
+    HttpClientModule,
+    MatDividerModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

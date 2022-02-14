@@ -2,7 +2,7 @@ export interface Drinks {
     Name:String;
     Glass:String;
     Category:String;
-    Ingrediants: String;
+    Ingrediants: Object;
     Alcohol: String;
     Instructions: String;
   }
