@@ -1,0 +1,28 @@
+<div class = "container">
+   <form #inputForm="ngForm">
+
+    <label>Search criteria: </label>
+       
+    <mat-radio-group>
+      <mat-radio-button value="sim_ing" checked>Similar drinks by ingrediants</mat-radio-button>
+      <mat-radio-button value="sim_inst">Similar drinks by instructions</mat-radio-button>
+      <mat-radio-button value="ing">Drink by ingrediants</mat-radio-button>
+      <mat-radio-button value="rec">Just give me the recepie</mat-radio-button>
+    </mat-radio-group>
+
+      <mat-form-field appearance="outline">
+         <mat-label>Drinks or Ingrediants</mat-label>
+         <input matInput placeholder="e.g. Mojito or rum,lime" required name="input">
+         <mat-icon matSuffix>local_drink</mat-icon>
+         <mat-hint>Enter your desired drink or ingrediants</mat-hint>
+       </mat-form-field>
+   
+       
+       
+       <div>
+        <button mat-raised-button color="primary" type="submit">Search</button>
+       </div>
+       
+   </form>
+   
+ </div>

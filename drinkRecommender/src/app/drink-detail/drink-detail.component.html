@@ -1,0 +1,47 @@
+<div *ngIf="drink">
+    <div class="container">
+        <div fxLayout="row wrap" fxLayoutGap="25px grid">
+          <div fxFlex="100%">
+            <mat-card class="mat-elevation-z4">
+                <mat-card-header>
+                    <div mat-card-avatar><mat-icon aria-hidden="false">local_drink</mat-icon></div>
+                    <mat-card-title>
+                        <h1>
+                            <p style="text-align: center;">
+                                {{drink.Name}}
+                            </p>
+                          </h1>
+                        </mat-card-title>
+                  </mat-card-header>
+                  <mat-divider></mat-divider>
+                  <mat-card-content>
+                      <p>
+                          <b>Glass: </b> {{drink.Glass}}
+                      </p>
+                      <p>
+                          <b>Alcohol: </b> {{drink.Alcohol}}
+                      </p>
+    
+                      <p>
+                        <b>Category: </b> {{drink.Category}}
+                      </p>
+    
+                      <p>
+                        <b>Ingrediants:</b>
+                      </p>
+                      <div *ngFor="let ingrediant of drink.Ingrediants | keyvalue">
+                        <p>
+                            - {{ingrediant.value}}
+                        </p>
+                      </div>
+                      <p>
+                        <b>Instructions:</b> <br> <br>{{drink.Instructions}}
+                      </p>
+                      
+                  </mat-card-content>
+              </mat-card>
+          </div>
+        </div>
+    </div>
+</div>
+

@@ -5,20 +5,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import { DrinksComponent } from './drinks/drinks.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
 import { MessagesComponent } from './messages/messages.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
+import { DrinkDetailComponent } from './drink-detail/drink-detail.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DrinksComponent,
-    MessagesComponent
+    MessagesComponent,
+    DrinkDetailComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,10 @@ import {MatIconModule} from '@angular/material/icon';
     FlexLayoutModule,
     HttpClientModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
+    MatRadioModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

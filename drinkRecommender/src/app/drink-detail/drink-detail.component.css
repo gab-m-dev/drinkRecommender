@@ -4,15 +4,12 @@ div.container {
     margin-left: 5%;
   }
 
-.container > mat-card {
-  width: 280px;
-}
-
-.mat-card{
-  cursor: pointer;
-}
-
 .mat-divider-horizontal{
   position: sticky !important;
   margin-bottom: 12px;
+}
+
+
+.mat-card{
+  /*text-align: center;*/
 }
