@@ -1,4 +1,5 @@
   <div class="container">
+    <h1>
     <div fxLayout="row wrap" fxLayoutGap="25px grid">
       <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" fxFlex.md="33%"  *ngFor="let drink of drinks">
         <a ></a>
@@ -15,6 +16,12 @@
               </mat-card-header>
               <mat-divider></mat-divider>
               <mat-card-content>
+                <p *ngIf="drink.Value_Ingrediants !== undefined">
+                  <b>Similarity: {{drink.Value_Ingrediants}}</b>
+                </p> 
+                <p *ngIf="drink.Value_Instructions !== undefined">
+                  <b>Similarity: {{drink.Value_Instructions}}</b>
+                </p> 
                   <p>
                       <b>Glass: </b>{{drink.Glass}}
                   </p>
@@ -36,5 +43,4 @@
               </mat-card-content>
           </mat-card>
       </div>
-    </div>
-    </div>
+  </div>

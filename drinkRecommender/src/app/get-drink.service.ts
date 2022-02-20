@@ -12,8 +12,8 @@ export class GetDrinkService {
     this.messageService.add('GetDrinkService: made');
    }
 
-  getDrinks(): Observable<any>{
+  getDrinks(searchQuery: string): Observable<any>{
     this.messageService.add('GetDrinkService: fetched drinks');
-    return this.http.get('http://localhost:8888/api-drinks');
+    return this.http.get('http://localhost:8888/api-drinks' + searchQuery);
   }
 }

@@ -1,28 +1,27 @@
 <div class = "container">
-   <form #inputForm="ngForm">
+   <form class="form-group" name="form" (ngSubmit)="searchForm.form.valid && onSubmit(searchForm.form.value)" #searchForm="ngForm">
 
     <label>Search criteria: </label>
        
-    <mat-radio-group>
-      <mat-radio-button value="sim_ing" checked>Similar drinks by ingrediants</mat-radio-button>
-      <mat-radio-button value="sim_inst">Similar drinks by instructions</mat-radio-button>
-      <mat-radio-button value="ing">Drink by ingrediants</mat-radio-button>
-      <mat-radio-button value="rec">Just give me the recepie</mat-radio-button>
+    <mat-radio-group [(ngModel)]="model.searchCriteria" name="searchCriteria" required="">
+      <mat-radio-button value="SimIng">Similar drinks by ingrediants</mat-radio-button>
+      <mat-radio-button value="SimInst" >Similar drinks by instructions</mat-radio-button>
+      <mat-radio-button value="Ing" >Drink by ingrediants</mat-radio-button>
+      <mat-radio-button value="Rec" >Just give me the recepie</mat-radio-button>
     </mat-radio-group>
 
-      <mat-form-field appearance="outline">
-         <mat-label>Drinks or Ingrediants</mat-label>
-         <input matInput placeholder="e.g. Mojito or rum,lime" required name="input">
-         <mat-icon matSuffix>local_drink</mat-icon>
-         <mat-hint>Enter your desired drink or ingrediants</mat-hint>
-       </mat-form-field>
-   
-       
-       
-       <div>
-        <button mat-raised-button color="primary" type="submit">Search</button>
-       </div>
-       
+    <mat-form-field appearance="outline">
+        <mat-label>Drinks or Ingrediants</mat-label>
+        <input matInput placeholder="e.g. Mojito or rum,lime" name="input" class="form-control" [(ngModel)]="model.input" #input="ngModel" required>
+        <mat-icon matSuffix>local_drink</mat-icon>
+        <mat-hint>Enter your desired drink or ingrediants</mat-hint>
+      </mat-form-field>
+  
+      
+      <div>
+      <button mat-raised-button color="primary" type="submit">Search</button>
+      </div>
+      
    </form>
    
  </div>

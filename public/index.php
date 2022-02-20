@@ -108,6 +108,52 @@ $app->get('/api-drinks/ing', function (Request $request, Response $response) {
     } 
 });
 
+$app->get('/api-drinks/rec/{drink}', function (Request $request, Response $response) {
+
+    $drink = $request->getAttribute('drink');
+
+    //check for limit argument
+    if(isset($_GET['limit']) AND $_GET['limit'] != 10 AND $_GET['limit'] > 0 AND $_GET['limit'] < 20){
+        $limit = $_GET['limit'];
+    }else{
+        $limit = 10;
+    }
+
+    //if only on character provided then fail -> not allowd
+    if(strlen($drink) > 1)
+    {
+        $sql_like = "SELECT Name, Category, Ingrediants, Alcohol, Glass, Instructions FROM Drinks WHERE Name LIKE CONCAT('%',:drink,'%') Limit $limit";
+        
+        try {
+            $db = new Db();
+            $conn = $db->connect();
+            $stmt = $conn->prepare($sql_like);
+            $stmt->bindParam('drink', $drink);
+            $stmt->execute();
+            $drinks = $stmt->fetchAll(PDO::FETCH_OBJ);
+            $db = null;
+            
+            $response->getBody()->write(json_encode($drinks));
+            return $response
+            ->withHeader('content-type', 'application/json')
+            ->withStatus(200);
+            } catch (PDOException $e) {
+                $error = array(
+                "message" => $e->getMessage()
+                );
+                $response->getBody()->write(json_encode($error));
+                return $response
+                ->withHeader('content-type', 'application/json')
+                ->withStatus(500);
+            }
+    } else{
+        $response->getBody()->write(json_encode('No such drink!'));
+                return $response
+                ->withHeader('content-type', 'application/json')
+                ->withStatus(500);
+    } 
+});
+
 
 $app->get('/api-drinks/{drink}', function (Request $request, Response $response) {
 
