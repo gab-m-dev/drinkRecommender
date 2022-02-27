@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '82b4781385d3154a19f9b8ccd6ac6151d143e222',
         'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '82b4781385d3154a19f9b8ccd6ac6151d143e222',
             'dev_requirement' => false,
         ),
         'fig/http-message-util' => array(
@@ -26,6 +26,15 @@
             'install_path' => __DIR__ . '/../fig/http-message-util',
             'aliases' => array(),
             'reference' => '9d94dc0154230ac39e5bf89398b324a86f63f765',
+            'dev_requirement' => false,
+        ),
+        'firebase/php-jwt' => array(
+            'pretty_version' => 'v6.0.0',
+            'version' => '6.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../firebase/php-jwt',
+            'aliases' => array(),
+            'reference' => '0541cba75ab108ef901985e68055a92646c73534',
             'dev_requirement' => false,
         ),
         'nikic/fast-route' => array(
@@ -119,6 +128,15 @@
             'install_path' => __DIR__ . '/../selective/basepath',
             'aliases' => array(),
             'reference' => '63961fbfcaf492bd0ae8e40653f6c3c750c2f8ad',
+            'dev_requirement' => false,
+        ),
+        'slim/http' => array(
+            'pretty_version' => '1.2.0',
+            'version' => '1.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../slim/http',
+            'aliases' => array(),
+            'reference' => '3bc9d61b5243cab0d75c89d778bd69464de07354',
             'dev_requirement' => false,
         ),
         'slim/psr7' => array(
