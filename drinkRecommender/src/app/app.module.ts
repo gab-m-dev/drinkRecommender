@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,20 +11,24 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
-import { MessagesComponent } from './messages/messages.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import { DrinkDetailComponent } from './drink-detail/drink-detail.component';
 import { SearchComponent } from './search/search.component';
+import { LoginComponent } from './login/login.component';
+import { UsageComponent } from './usage/usage.component';
+import { AuthInterceptor } from './auth.interceptor';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
     DrinksComponent,
-    MessagesComponent,
     DrinkDetailComponent,
-    SearchComponent
+    SearchComponent,
+    LoginComponent,
+    UsageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +43,17 @@ import { SearchComponent } from './search/search.component';
     MatIconModule,
     MatInputModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    MatMenuModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi   : true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

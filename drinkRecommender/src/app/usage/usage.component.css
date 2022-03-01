@@ -1,0 +1,9 @@
+.container {
+    margin: 2%;
+    margin-left: 5% ;
+    margin-right: 5% ;
+}
+
+.container > * {
+    margin-top:20px;
+ }

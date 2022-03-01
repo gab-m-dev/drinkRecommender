@@ -1,9 +1,28 @@
 <mat-toolbar color="primary">
-    {{title}}
+    <span><i>gabor's</i> drinkRecommender</span>
+    <span class="spacer"></span>
+    <button mat-icon-button [routerLink]="['/login']" *ngIf="!loggedIn()">
+        <span>Login</span>
+    </button>
+    <button mat-icon-button [routerLink]="['/login']" [state]="{logout: true} " *ngIf="loggedIn()">
+        <span>Logout</span>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/search']">
+          <span>Search</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/drinks']">
+          <span>Random drinks</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/usage']">
+            <span>Usage data</span>
+        </button>
+    </mat-menu>
+
+
 </mat-toolbar>
 
-<nav>
-    <a routerLink="/drinks">Drinks</a>
-    <a routerLink="/search">Search</a>
-</nav>
 <router-outlet></router-outlet>

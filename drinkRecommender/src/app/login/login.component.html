@@ -1,0 +1,22 @@
+<div class = "container">
+    <form class="form-group" name="form" (ngSubmit)="loginForm.form.valid && onSubmit(loginForm.form.value)" #loginForm="ngForm">
+ 
+        <h1>Login: </h1>
+            
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="e.g. user" name="username" class="form-control" [(ngModel)]="model.username" #input="ngModel" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput name="password" class="form-control" [(ngModel)]="model.password" #input="ngModel" type="password" required>
+        </mat-form-field>
+        
+        <div>
+            <button mat-raised-button color="primary" type="submit">Login</button>
+        </div>
+       
+    </form>
+</div>
+

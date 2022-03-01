@@ -37,7 +37,6 @@ export class SearchComponent implements OnInit {
   onSubmit(input: any) {
     this.parseData(input);
     this.router.navigate(['/drinks'], {state: {data: this.searchQuery, label: this.label}});
-    console.log(input);
   }
 
   parseData(input: any){

@@ -2,6 +2,8 @@
 
 // nur Temp!
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 
 use Slim\Http\Response as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -31,7 +33,7 @@ $app->post('/login', function (Request $request, Response $response, $arg){
         $token = [
             "iss" => "drinks.gabormuff.info",
             "iat" => time(),
-            "exp" => time() + 60*60,
+            "exp" => time() + 15,
             "data" => [
             "username" => $config['user']['username']
             ]
@@ -60,7 +62,7 @@ $app->get('/usage', function (Request $request, Response $response, $arg){
     try {
         $decoded = JWT::decode($jwt, new key ($config['secret'],'HS256'));
     } catch (Exception $e) {
-        $response->getBody()->write(json_encode('Kein Zugriff, bitte einloggen'));
+        $response->getBody()->write(json_encode('No access, please log in!'));
                 return $response
                 ->withHeader('content-type', 'application/json')
                 ->withStatus(500);
@@ -288,6 +290,5 @@ $app->get('/api-drinks/{drink}', function (Request $request, Response $response)
                 ->withStatus(500);
     } 
 });
-
 
 $app->run();

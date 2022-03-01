@@ -17,13 +17,7 @@
 .container > form > button {
     width: 10%;
 }
- .container .mat-radio-button {
-    margin: 0 12px;
-  }
 
 .container > label {
-    margin-top:12px;
-}
-.container .mat-radio-group {
     margin-top:12px;
 }
