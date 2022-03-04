@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from './login/login.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,6 +12,8 @@ export class AppComponent implements OnInit{
   loginState = false;
   loginText = "Login";
 
+  constructor(private router: Router){}
+
   ngOnInit(): void {
       this.loggedIn;
   }
@@ -23,5 +25,9 @@ export class AppComponent implements OnInit{
     else{
       return false;
     }
+  }
+
+  drinksOnClick(){
+    this.router.navigate(['/drinks']).then(() => {location.reload();});
   }
 }

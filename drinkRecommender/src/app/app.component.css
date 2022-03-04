@@ -1,3 +1,10 @@
 .spacer {
     flex: 1 1 auto;
   }
+
+  @media(max-width: 700px){
+    .mat-toolbar h1{
+      font: 500 18px/32px Roboto, "Helvetica Neue", sans-serif;
+    }
+  }
+  

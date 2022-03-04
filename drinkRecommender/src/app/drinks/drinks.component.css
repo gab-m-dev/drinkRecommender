@@ -1,12 +1,8 @@
 div.container {
-    margin: 2%;
+    margin: 3%;
     margin-right: 5%;
     margin-left: 5%;
   }
-
-.container > mat-card {
-  width: 280px;
-}
 
 .mat-card{
   cursor: pointer;

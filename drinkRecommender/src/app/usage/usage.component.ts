@@ -12,8 +12,6 @@ export class UsageComponent implements OnInit {
   
   usage?: Usage;
 
-  
-
   constructor(private getUsageService: GetUsageService, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,7 +26,7 @@ export class UsageComponent implements OnInit {
   getUsage(): void{
     this.getUsageService.getUsage().subscribe(
       (response) => {this.usage = new Usage(response[0]['similarDrinks'], response[0]['searchedDrinks']);}, 
-      (error) => {this.router.navigate(['/login'], {state: {logout: true}}).then(() => { alert("Session expired. Please log in again.")});
+      (error) => {this.router.navigate(['/login'], {state: {logout: true}}).then(() => { alert("Session expired. Please log in again." )});
     });
   }
 }

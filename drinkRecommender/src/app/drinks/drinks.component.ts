@@ -35,7 +35,7 @@ export class DrinksComponent implements OnInit {
       }});
     } else {
       this.getDrinkService.getDrinks("").subscribe((returnedDrinks: Array<Drink>) => { for(let i = 0; i < returnedDrinks.length; i++){
-        this.drinks.push(new Drink(returnedDrinks[i].Name,returnedDrinks[i].Glass,returnedDrinks[i].Category, JSON.parse(String(returnedDrinks[i].Ingrediants).replace(/'/g, '"')),returnedDrinks[i].Alcohol,returnedDrinks[i].Instructions))
+        this.drinks.push(new Drink(returnedDrinks[i].Name,returnedDrinks[i].Glass,returnedDrinks[i].Category, JSON.parse(String(returnedDrinks[i].Ingrediants).replace(/'/g, '"')),returnedDrinks[i].Alcohol,returnedDrinks[i].Instructions, returnedDrinks[i].Value_Ingrediants, returnedDrinks[i].Value_Instructions))
       }});
     }
       

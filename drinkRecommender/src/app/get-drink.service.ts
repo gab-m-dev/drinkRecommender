@@ -11,6 +11,6 @@ export class GetDrinkService {
    }
 
   getDrinks(searchQuery: string): Observable<any>{
-    return this.http.get('http://localhost:8888/api-drinks' + searchQuery);
+    return this.http.get('https://api-drinks.gabormuff.info/api-drinks' + searchQuery);
   }
 }

@@ -1,13 +1,26 @@
 <div class="container">
     <h1>Usage data: </h1>
 
-    <mat-card *ngIf="usage !== undefined">
-        Total number of similar drinks shown: <b>{{usage.similarDinks}}</b> 
-    </mat-card>
+    <div fxLayout="row wrap" fxLayoutAlign="center">
+        <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="75%" fxFlex.md="60%" fxFlex.lg="50%">
 
-    <mat-card *ngIf="usage !== undefined">
-        Total number of searched drinks: <b>{{usage.searchedDrinks}}</b>
-    </mat-card>
+            <mat-card *ngIf="usage !== undefined">
+                <img mat-card-image src="assets/usage.jpg" alt="Usage https://unsplash.com">
+                <mat-card-content>
+                    <p>
+                        Get an insight in the number of processed requests: 
+                    </p>
+                    <p>
+                        Total number of similarity searches performend: <b>{{usage.similarDinks}}</b> 
+                    </p>
+                    <p>
+                        Total number of drink searches performend: <b>{{usage.searchedDrinks}}</b> 
+                    </p>
+                </mat-card-content>
+                
+            </mat-card>
+        </div>
+    </div> 
 
 </div>
 

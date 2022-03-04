@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
     if(authResult.jwt !== undefined){
       localStorage.setItem('id_token', authResult.jwt);
-      this.router.navigate(['/usage']);
+      this.router.navigate(['/usagedata']);
     } else {
       this.router.navigate(['/login']).then(() => {alert("Username or Password false")})
     }

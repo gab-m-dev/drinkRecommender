@@ -1,5 +1,8 @@
 <mat-toolbar color="primary">
-    <span><i>gabor's</i> drinkRecommender</span>
+    <button mat-icon-button [routerLink]="['/search']">
+        <h1><i>gabor's </i>DrinkRecommender</h1>
+    </button>
+    
     <span class="spacer"></span>
     <button mat-icon-button [routerLink]="['/login']" *ngIf="!loggedIn()">
         <span>Login</span>
@@ -14,11 +17,14 @@
         <button mat-menu-item [routerLink]="['/search']">
           <span>Search</span>
         </button>
-        <button mat-menu-item [routerLink]="['/drinks']">
+        <button mat-menu-item (click)="drinksOnClick()">
           <span>Random drinks</span>
         </button>
-        <button mat-menu-item [routerLink]="['/usage']">
+        <button mat-menu-item [routerLink]="['/usagedata']">
             <span>Usage data</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/info']">
+            <span>Info</span>
         </button>
     </mat-menu>
 

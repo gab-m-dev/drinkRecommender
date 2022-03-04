@@ -1,9 +1,9 @@
 <?php
 
-// nur Temp!
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://drinks.gabormuff.info");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+header('Content-type: text/plain; charset=utf-8');
 
 use Slim\Http\Response as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -13,7 +13,7 @@ use \Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use App\Models\DB;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -22,18 +22,17 @@ $app->addBodyParsingMiddleware();
 $app->add(new BasePathMiddleware($app));
 $app->addErrorMiddleware(true, true, true);
 
-
 //Login und Erstellung JWT
 $app->post('/login', function (Request $request, Response $response, $arg){
     
     $body = $request->getParsedBody();
-    $config = include(__DIR__ . '\..\src\local.php');
+    $config = include(__DIR__ . '/src/local.php');
 
     if ($config['user']['username'] == $body['username'] && password_verify($body['password'], $config['user']['password'])){
         $token = [
             "iss" => "drinks.gabormuff.info",
             "iat" => time(),
-            "exp" => time() + 15,
+            "exp" => time() + 60*60,
             "data" => [
             "username" => $config['user']['username']
             ]
@@ -53,10 +52,10 @@ $app->post('/login', function (Request $request, Response $response, $arg){
 });
 
 // get usage data if you are loged in
-$app->get('/usage', function (Request $request, Response $response, $arg){
+$app->get('/usagedata', function (Request $request, Response $response, $arg){
 
-    $config = include(__DIR__ . '\..\src\local.php');
-    $jwt = $request->getHeaders();
+    $config = include(__DIR__ . '/src/local.php');
+	$jwt = $request->getHeaders();
     $jwt = str_replace('Bearer ', '', $jwt['Authorization'][0]);
 
     try {
@@ -94,14 +93,20 @@ $app->get('/usage', function (Request $request, Response $response, $arg){
  
 });
 
+//get 10 random Drinks
 $app->get('/api-drinks', function (Request $request, Response $response) {
     $sql = "SELECT Name, Category, Ingrediants, Alcohol, Glass, Instructions FROM Drinks ORDER BY RAND() Limit 10";
+    $inc = "UPDATE UsageData SET searchedDrinks = searchedDrinks + 1";
 
     try {
         $db = new Db();
         $conn = $db->connect();
         $stmt = $conn->query($sql);
         $drinks = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        //increment number of searched drinks 
+        $conn->query($inc);
+
         $db = null;
         
         $response->getBody()->write(json_encode($drinks));
@@ -119,7 +124,7 @@ $app->get('/api-drinks', function (Request $request, Response $response) {
     }
 });
 
-
+//get drinks according to ingrediants
 $app->get('/api-drinks/ing', function (Request $request, Response $response) {
 
     //ing input is an array -> ing[]=bla&ing[]=bla...
@@ -137,6 +142,7 @@ $app->get('/api-drinks/ing', function (Request $request, Response $response) {
     {
         //create sql statement to check for ingradiants ingrediants
         $sql = "SELECT Name, Category, Ingrediants, Alcohol, Glass, Instructions FROM Drinks WHERE ";
+        $inc = "UPDATE UsageData SET searchedDrinks = searchedDrinks + 1";
 
         for($i = 0; $i < count($ing); $i++){
             if(($i + 1) == count($ing)){
@@ -155,14 +161,18 @@ $app->get('/api-drinks/ing', function (Request $request, Response $response) {
             }
             
             $stmt->execute();
-
             $drinks = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            //increment number of searched drinks 
+            $conn->query($inc);
+
             $db = null;
             
             $response->getBody()->write(json_encode($drinks));
             return $response
             ->withHeader('content-type', 'application/json')
             ->withStatus(200);
+
             } catch (PDOException $e) {
                 $error = array(
                 "message" => $e->getMessage()
@@ -180,6 +190,7 @@ $app->get('/api-drinks/ing', function (Request $request, Response $response) {
     } 
 });
 
+//get drinks recepies
 $app->get('/api-drinks/rec/{drink}', function (Request $request, Response $response) {
 
     $drink = $request->getAttribute('drink');
@@ -195,6 +206,7 @@ $app->get('/api-drinks/rec/{drink}', function (Request $request, Response $respo
     if(strlen($drink) > 1)
     {
         $sql_like = "SELECT Name, Category, Ingrediants, Alcohol, Glass, Instructions FROM Drinks WHERE Name LIKE CONCAT('%',:drink,'%') Limit $limit";
+        $inc = "UPDATE UsageData SET searchedDrinks = searchedDrinks + 1";
         
         try {
             $db = new Db();
@@ -203,6 +215,10 @@ $app->get('/api-drinks/rec/{drink}', function (Request $request, Response $respo
             $stmt->bindParam('drink', $drink);
             $stmt->execute();
             $drinks = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            //increment number of searched drinks 
+            $conn->query($inc);
+
             $db = null;
             
             $response->getBody()->write(json_encode($drinks));
@@ -226,7 +242,7 @@ $app->get('/api-drinks/rec/{drink}', function (Request $request, Response $respo
     } 
 });
 
-
+//get similar drinks
 $app->get('/api-drinks/{drink}', function (Request $request, Response $response) {
 
     $drink = $request->getAttribute('drink');
@@ -250,6 +266,7 @@ $app->get('/api-drinks/{drink}', function (Request $request, Response $response)
     if(strlen($drink) > 1)
     {
         $sql_similarity = "SELECT D2.Name, $similarity, D2.Category, D2.Ingrediants, D2.Alcohol, D2.Glass, D2.Instructions FROM Drinks AS D,Drinks_Similarity AS D_S, Drinks AS D2 WHERE D.Name = :drink AND D.ID = D_S.fk_Drink1 AND D2.ID = D_S.fk_Drink2 ORDER BY $similarity DESC limit 1,$limit";
+        $inc = "UPDATE UsageData SET similarDrinks = similarDrinks + 1";
 
         try {
             $db = new Db();
@@ -257,17 +274,28 @@ $app->get('/api-drinks/{drink}', function (Request $request, Response $response)
             $stmt = $conn->prepare($sql_similarity);
             $stmt->bindParam('drink', $drink);
             $stmt->execute();
-
             $drinks = $stmt->fetchAll(PDO::FETCH_OBJ);
+			
+			if (!empty($drinks)){
+				var_dump($drinks);
+				
+				
+			}
+			
 
             //if empty check if name is like
             if (empty($drinks)){
                 $sql_like = "SELECT Name, Category, Ingrediants, Alcohol, Glass, Instructions FROM Drinks WHERE Name LIKE CONCAT('%',:drink,'%') ORDER BY RAND() Limit $limit";
+                $inc = "UPDATE UsageData SET searchedDrinks = searchedDrinks + 1";
+
                 $stmt = $conn->prepare($sql_like);
                 $stmt->bindParam('drink', $drink);
                 $stmt->execute();
                 $drinks = $stmt->fetchAll(PDO::FETCH_OBJ);
             }
+			
+            //increment number of searched drinks 
+            $conn->query($inc);
             $db = null;
             
             $response->getBody()->write(json_encode($drinks));
@@ -278,7 +306,7 @@ $app->get('/api-drinks/{drink}', function (Request $request, Response $response)
                 $error = array(
                 "message" => $e->getMessage()
                 );
-                $response->getBody()->write(json_encode($error));
+                $response->getBody()->write(json_encode("hier passiert der Fehler!"));
                 return $response
                 ->withHeader('content-type', 'application/json')
                 ->withStatus(500);

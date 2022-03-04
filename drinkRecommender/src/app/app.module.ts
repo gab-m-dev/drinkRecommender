@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { UsageComponent } from './usage/usage.component';
 import { AuthInterceptor } from './auth.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatMenuModule} from '@angular/material/menu';
     DrinkDetailComponent,
     SearchComponent,
     LoginComponent,
-    UsageComponent
+    UsageComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,

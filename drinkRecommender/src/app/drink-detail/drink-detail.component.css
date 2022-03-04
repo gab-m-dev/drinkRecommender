@@ -1,5 +1,5 @@
 div.container {
-    margin: 2%;
+    margin: 3%;
     margin-right: 5%;
     margin-left: 5%;
   }
@@ -9,7 +9,3 @@ div.container {
   margin-bottom: 12px;
 }
 
-
-.mat-card{
-  /*text-align: center;*/
-}
