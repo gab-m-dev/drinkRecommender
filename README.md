@@ -25,3 +25,7 @@ Change URLs in:
 Change DB Name in /api-drinks/src/Models
 
 Change settings in /api-drinks/src/local-example.php and rename to local.php
+
+
+Data for DB under /db:
+-------------------
