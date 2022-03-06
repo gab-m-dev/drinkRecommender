@@ -10,6 +10,6 @@ export class GetUsageService {
   constructor(private http: HttpClient) { }
 
   getUsage(): Observable<any>{
-      return this.http.get('https://api-drinks.gabormuff.info/usagedata');
+      return this.http.get('url');
   }
 }

@@ -7,7 +7,7 @@ class DB
 {
     
     private $host = 'localhost';
-    private $dbname = 'DrinksDB';
+    private $dbname = 'dbName';
 
     public function connect()
     {

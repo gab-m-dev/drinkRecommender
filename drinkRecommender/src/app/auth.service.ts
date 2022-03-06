@@ -11,6 +11,6 @@ export class AuthService {
    }
 
   login(username: string, password: string): Observable<any>{
-    return this.http.post<any>('https://api-drinks.gabormuff.info/login', {username: username, password: password});
+    return this.http.post<any>('url', {username: username, password: password});
   }
 }
