@@ -14,7 +14,7 @@ To create build
 ng build
 
 
-Change URLs and access data to use App localy:
+Change URLs and credentials to use App localy:
 -------------------
 
 Change URLs in:
