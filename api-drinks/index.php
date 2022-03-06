@@ -37,6 +37,7 @@ $app->post('/login', function (Request $request, Response $response, $arg){
             "username" => $config['user']['username']
             ]
             ];
+            //create JWT
             $jwt = JWT::encode($token, $config['secret'], 'HS256');
             return $response->withJson([
             'success' => true,
@@ -59,6 +60,7 @@ $app->get('/usagedata', function (Request $request, Response $response, $arg){
     $jwt = str_replace('Bearer ', '', $jwt['Authorization'][0]);
 
     try {
+        //check if JWT is valid
         $decoded = JWT::decode($jwt, new key ($config['secret'],'HS256'));
     } catch (Exception $e) {
         $response->getBody()->write(json_encode('No access, please log in!'));
@@ -276,13 +278,6 @@ $app->get('/api-drinks/{drink}', function (Request $request, Response $response)
             $stmt->execute();
             $drinks = $stmt->fetchAll(PDO::FETCH_OBJ);
 			
-			if (!empty($drinks)){
-				var_dump($drinks);
-				
-				
-			}
-			
-
             //if empty check if name is like
             if (empty($drinks)){
                 $sql_like = "SELECT Name, Category, Ingrediants, Alcohol, Glass, Instructions FROM Drinks WHERE Name LIKE CONCAT('%',:drink,'%') ORDER BY RAND() Limit $limit";
