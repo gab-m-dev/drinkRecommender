@@ -1,1 +1,20 @@
-api-drinks/src/local.php
+#Slim
+#---------------------
+/api-drinks/src/local.php
+/api-drinks/vendor/*
+
+# Angular Files
+#--------------------
+
+# compiled output
+drinkRecommender/dist
+drinkRecommender/tmp
+drinkRecommender/out-tsc
+
+# dependencies
+drinkRecommender/node_modules
+
+
+# System Files
+.DS_Store
+Thumbs.db
