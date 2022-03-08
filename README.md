@@ -1,5 +1,7 @@
 # drinkRecommender
 
+Instructions to run site locally
+
 PHP Slim App in directory /api-drinks:
 --------------------------------------
 To install dependencies, run:
