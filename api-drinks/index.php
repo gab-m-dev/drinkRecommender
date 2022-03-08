@@ -1,6 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: https://drinks.gabormuff.info");
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 header('Content-type: text/plain; charset=utf-8');
