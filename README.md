@@ -29,3 +29,7 @@ Change settings in /api-drinks/src/local-example.php and rename to local.php (Pa
 Data for DB under /db:
 -------------------
 MariaDB is needed
+
+Change CORS URL in /api-drinks/index.php
+------------------
+* is set for testing
