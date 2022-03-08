@@ -30,6 +30,6 @@ Data for DB under /db:
 -------------------
 MariaDB is needed
 
-Change CORS URL in /api-drinks/index.php
+Change "Access-Control-Allow-Origin" URL in /api-drinks/index.php
 ------------------
 "*" is set for testing
