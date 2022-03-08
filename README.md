@@ -32,4 +32,4 @@ MariaDB is needed
 
 Change CORS URL in /api-drinks/index.php
 ------------------
-* is set for testing
+"*" is set for testing
